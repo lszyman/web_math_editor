@@ -2,6 +2,7 @@
 
 ## Instalacja
 
+- Instalacja bower (`npm install -g bower`)
 - Sciagniecie zaleznosci (`npm install`)
 - Uruchomienie aplikacji (`npm start`)
 - Uruchomienie testow (`npm test`)

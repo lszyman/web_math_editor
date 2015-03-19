@@ -1,0 +1,21 @@
+{
+  "name": "web-math-editor",
+  "description": "Web math editor",
+  "version": "0.0.0",
+  "homepage": "https://bitbucket.org/szymenek/web_math_editor",
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "angular": "1.3.x",
+    "angular-route": "1.3.x",
+    "angular-resource": "1.3.x",
+    "angular-animate": "1.3.x",
+    "angular-loader": "1.3.x",
+    "angular-mocks": "1.3.x",
+    "html5-boilerplate": "~4.3.0",
+    "jquery": "~2.1.1",
+    "bootstrap": "~3.3.4",
+    "flat-ui": "~2.2.2",
+    "mathjs": "~1.4.0"
+  }
+}

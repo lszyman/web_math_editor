@@ -5,6 +5,10 @@
   "description": "Web math editor",
   "repository": "https://bitbucket.org/szymenek/web_math_editor",
   "license": "MIT",
+  "engines": {
+	"node": "0.12.x"
+	"npm": "2.5.x"
+  },
   "devDependencies": {
     "bower": "^1.3.1",
     "http-server": "^0.6.1",

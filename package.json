@@ -6,7 +6,7 @@
   "repository": "https://bitbucket.org/szymenek/web_math_editor",
   "license": "MIT",
   "engines": {
-	"node": "0.12.x"
+	"node": "0.12.x",
 	"npm": "2.5.x"
   },
   "devDependencies": {

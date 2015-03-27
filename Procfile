@@ -1,1 +1,1 @@
-web: http-server -a localhost -p $PORT -c-1
+web: bundle exec thin start -p $PORT

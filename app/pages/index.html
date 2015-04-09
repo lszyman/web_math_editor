@@ -13,7 +13,9 @@
     <link rel="stylesheet" href="../css/app.css">
 
     <script type="text/javascript">
+        //CLIENT_ID - heroku
         var CLIENT_ID = '223087526287-k0h09nr6ah0ebbsdunaugel5bodnt3uh.apps.googleusercontent.com';
+        //var CLIENT_ID = '223087526287-j631u4mj7s6g7rptvplu4457i0igvojh.apps.googleusercontent.com';
         var SCOPES = 'https://www.googleapis.com/auth/drive';
 
         /**
@@ -117,6 +119,40 @@
                 request.execute(callback);
             }
         }
+
+        /**
+         * Print a file's content.
+         *
+         * @param {String} fileId ID of the file to print content for.
+         */
+        function printFile(fileId) {
+            var request = gapi.client.request({
+                'path': '/drive/v2/files/' + fileId,
+                'method': 'GET',
+                callback: function ( theResponseJS, theResponseTXT ) {
+                    var myToken = gapi.auth.getToken();
+                    var myXHR   = new XMLHttpRequest();
+                    myXHR.open('GET', theResponseJS.downloadUrl, true );
+                    myXHR.setRequestHeader('Authorization', 'Bearer ' + myToken.access_token);
+                    myXHR.onreadystatechange = function( theProgressEvent ) {
+                        if (myXHR.readyState == 4) {
+                            //1=connection ok, 2=Request received, 3=running, 4=terminated
+                            if ( myXHR.status == 200 ) {
+                                console.log(myXHR.response);
+                                $('#mathExpression').val(myXHR.response);
+                            }
+                        }
+                    };
+                    myXHR.send();
+                }
+            });
+        }
+
+        function executePrintFile() {
+            var fileId = $('#fileIdLoadFromGoogleDrive').val();
+            printFile(fileId)
+        }
+
     </script>
     <script type="text/javascript" src="https://apis.google.com/js/client.js?onload=handleClientLoad"></script>
 </head>
@@ -161,6 +197,12 @@
 <div class="container">
     <div class="jumbotron">
         <h1>Web Math Editor</h1>
+
+        <label for="fileIdLoadFromGoogleDrive"><b>File Id: </b>
+            <input id="fileIdLoadFromGoogleDrive" type="text" name="fileIdLoadFromGoogleDrive" value="0B47CPHRFDjO-NjVyWTB3a3o3V2s" class="form-control" style="width: 300px">
+            <input type="button" id="loadFromGoogleDrive" value="Load file's content" class="btn btn-primary" onclick="executePrintFile()"/>
+        </label>
+
         <div ng-view></div>
 
         <input type="file" id="filePicker" style="display: none" />

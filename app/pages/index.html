@@ -101,6 +101,27 @@
 
 <script src="../js/index.js"></script>
 <script type="text/javascript" src="https://apis.google.com/js/client.js?onload=handleClientLoad"></script>
+<script>
+    $(function() {
+        $("#refreshFilesListButton").click(function(event) {
+            retrieveAllFiles(function(result) {
+                console.log(result);
+            });
+        });
+
+        $(document).on("click", ".deleteFile", function(event) {
+            if (confirm("Going to delete the file. Are you sure?")) {
+                var fileId = $(event.target).closest(".deleteFile").data("file");
+                deleteFile(fileId);
+            }
+        });
+
+        $(document).on("click", ".openFile", function(event) {
+            var fileId = $(event.target).closest(".openFile").data("file");
+            printFile(fileId);
+        });
+    });
+</script>
 
 </body>
 </html>

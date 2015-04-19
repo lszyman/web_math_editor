@@ -1,4 +1,9 @@
 
-<label for="mathExpression">Enter what you want to calculate: </label>
-<textarea class="form-control" ng-model="exp" rows="5" id="mathExpression"></textarea>
+<label for="MathPreview"><b>IMAGE Expression:</b></label>
+<div id="MathPreview" style="border:1px solid; padding: 3px; margin-top:5px"></div>
+<div id="MathBuffer" style="border:1px solid; padding: 3px; margin-top:5px;
+visibility:hidden; position:absolute; top:0; left: 0"></div>
+<br>
+<label for="mathExpression"><b>LATEX Expression: </b></label>
+<textarea class="form-control" rows="5" id="mathExpression" onkeyup="Preview.Update()">x = {-b \pm \sqrt{b^2-4ac} \over 2a}</textarea>
 <p><b>Result:</b> {{ mathExpression(exp) }}</p>

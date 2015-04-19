@@ -14,45 +14,65 @@
 </head>
 
 <body>
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-megadropdown-tabs">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#/index">Web Math Editor</a>
+            </div>
 
-<nav class="navbar navbar-inverse navbar-fixed-top">
-    <div class="container">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
-                    aria-expanded="false" aria-controls="navbar">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="#/index">Web Math Editor</a>
-        </div>
-        <div id="navbar" class="navbar-collapse collapse">
-            <ul class="nav navbar-nav">
-                <li class="active"><a href="#">Home</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#contact">Contact</a></li>
-                <li class="dropdown">
-                    <a href="#/index" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Dropdown
-                        <span class="caret"></span></a>
-                    <ul class="dropdown-menu" role="menu">
-                        <li><a href="#">Action</a></li>
-                        <li><a href="#">Another action</a></li>
-                        <li><a href="#">Something else here</a></li>
-                        <li class="divider"></li>
-                        <li class="dropdown-header">Nav header</li>
-                        <li><a href="#">Separated link</a></li>
-                        <li><a href="#">One more separated link</a></li>
-                    </ul>
-                </li>
-            </ul>
-        </div>
-    </div>
-</nav>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-megadropdown-tabs">
+                <ul class="nav navbar-nav">
+                    <li class="dropdown mega-dropdown">
+                        <a href="#/index" class="dropdown-toggle" data-toggle="dropdown">Trigonometry <span class="caret"></span></a>
+                        <div class="dropdown-menu mega-dropdown-menu">
+                            <div class="container-fluid">
+                                <!-- Tab panes -->
+                                <div class="tab-content">
+                                    <div class="tab-pane active" id="trigonometry">
+                                        <ul class="nav-list list-inline">
+                                            <li><button class="btn btn-primary" onclick="setLatexValue('\\sin(x)')">sin(x)</button></li>
+                                            <li><button class="btn btn-primary" onclick="setLatexValue('\\cos(x)')">cos(x)</button></li>
+                                            <li><button class="btn btn-primary" onclick="setLatexValue('\\tan(x)')">tg(x)</button></li>
+                                            <li><button class="btn btn-primary" onclick="setLatexValue('\\cot(x)')">ctg(x)</button></li>
+                                            <li><button class="btn btn-primary" onclick="setLatexValue('\\arcsin(x)')">arcsin(x)</button></li>
+                                            <li><button class="btn btn-primary" onclick="setLatexValue('\\arccos(x)')">arccos(x)</button></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="#">Link</a></li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <span class="caret"></span></a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a href="#">Action</a></li>
+                            <li><a href="#">Another action</a></li>
+                            <li><a href="#">Something else here</a></li>
+                            <li class="divider"></li>
+                            <li><a href="#">Separated link</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+    </nav>
 
 <div class="container">
     <div class="jumbotron">
         <h1>Web Math Editor</h1>
+
+        <div ng-view></div>
 
         <div>
             <input type="button" id="refreshFilesListButton" class="btn btn-success" value="Get files list">
@@ -76,8 +96,6 @@
             <input id="fileIdLoadFromGoogleDrive" type="text" name="fileIdLoadFromGoogleDrive" value="0B47CPHRFDjO-NjVyWTB3a3o3V2s" class="form-control" style="width: 300px">
             <input type="button" id="loadFromGoogleDrive" value="Load file's content" class="btn btn-primary" onclick="executePrintFile()"/>
         </label>
-
-        <div ng-view></div>
 
         <input type="file" id="filePicker" class="btn btn-default" style="display: none" />
 
@@ -121,6 +139,24 @@
             printFile(fileId);
         });
     });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        showProcessingMessages: false,
+        tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+    });
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script src="../js/indexMathjax.js"></script>
+<script>
+    Preview.callback = MathJax.Callback(["CreatePreview",Preview]);
+    Preview.callback.autoReset = true;  // make sure it can run more than once
+
+    window.onload = function() {
+        Preview.Init();
+    };
 </script>
 
 </body>

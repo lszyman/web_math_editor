@@ -11,6 +11,18 @@
     <link rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap.css">
     <link rel="stylesheet" href="../bower_components/flat-ui/dist/css/flat-ui.css">
     <link rel="stylesheet" href="../css/app.css">
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+            showProcessingMessages: false,
+            tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+        });
+    </script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script src="../js/indexMathjax.js"></script>
+    <script>
+        Preview.callback = MathJax.Callback(["CreatePreview",Preview]);
+        Preview.callback.autoReset = true;  // make sure it can run more than once
+    </script>
 </head>
 
 <body>
@@ -141,21 +153,8 @@
         });
     });
 </script>
-
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-        showProcessingMessages: false,
-        tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
-    });
-</script>
-
-<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-<script src="../js/indexMathjax.js"></script>
 <script>
     window.onload = function() {
-        Preview.callback = MathJax.Callback(["CreatePreview",Preview]);
-        Preview.callback.autoReset = true;  // make sure it can run more than once
-
         Preview.Init();
         updateImageExpression();
     };

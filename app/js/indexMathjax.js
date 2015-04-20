@@ -68,3 +68,9 @@ function setLatexValue(latexExpression) {
     var latexTextArea = $('#mathExpression');
     latexTextArea.val(latexTextArea.val() + latexExpression);
 }
+
+function updateImageExpression() {
+    $('#mathExpression').livequery(function() {
+        Preview.Update();
+    });
+}

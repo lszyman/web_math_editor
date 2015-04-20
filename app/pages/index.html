@@ -38,12 +38,12 @@
                                 <div class="tab-content">
                                     <div class="tab-pane active" id="trigonometry">
                                         <ul class="nav-list list-inline">
-                                            <li><button class="btn btn-primary" onclick="setLatexValue('\\sin(x)')">sin(x)</button></li>
-                                            <li><button class="btn btn-primary" onclick="setLatexValue('\\cos(x)')">cos(x)</button></li>
-                                            <li><button class="btn btn-primary" onclick="setLatexValue('\\tan(x)')">tg(x)</button></li>
-                                            <li><button class="btn btn-primary" onclick="setLatexValue('\\cot(x)')">ctg(x)</button></li>
-                                            <li><button class="btn btn-primary" onclick="setLatexValue('\\arcsin(x)')">arcsin(x)</button></li>
-                                            <li><button class="btn btn-primary" onclick="setLatexValue('\\arccos(x)')">arccos(x)</button></li>
+                                            <li><button class="btn btn-primary" onclick="setLatexValue('\\sin(x)');updateImageExpression();">sin(x)</button></li>
+                                            <li><button class="btn btn-primary" onclick="setLatexValue('\\cos(x)');updateImageExpression();">cos(x)</button></li>
+                                            <li><button class="btn btn-primary" onclick="setLatexValue('\\tan(x)');updateImageExpression();">tg(x)</button></li>
+                                            <li><button class="btn btn-primary" onclick="setLatexValue('\\cot(x)');updateImageExpression();">ctg(x)</button></li>
+                                            <li><button class="btn btn-primary" onclick="setLatexValue('\\arcsin(x)');updateImageExpression();">arcsin(x)</button></li>
+                                            <li><button class="btn btn-primary" onclick="setLatexValue('\\arccos(x)');updateImageExpression();">arccos(x)</button></li>
                                         </ul>
                                     </div>
                                 </div>
@@ -108,12 +108,13 @@
     </footer>
 </div>
 
-
 <script src="../bower_components/jquery/dist/jquery.js"></script>
 <script src="../bower_components/flat-ui/dist/js/flat-ui.js"></script>
 <script src="../bower_components/angular/angular.js"></script>
 <script src="../bower_components/angular-route/angular-route.js"></script>
 <script src="../bower_components/mathjs/dist/math.js" type="text/javascript"></script>
+<script src="../bower_components/jquery.livequery/dist/jquery.livequery.min.js"></script>
+
 <script src="../js/app.js"></script>
 <script src="../js/controllers.js"></script>
 
@@ -156,6 +157,7 @@
 
     window.onload = function() {
         Preview.Init();
+        updateImageExpression();
     };
 </script>
 

@@ -152,10 +152,10 @@
 <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 <script src="../js/indexMathjax.js"></script>
 <script>
-    Preview.callback = MathJax.Callback(["CreatePreview",Preview]);
-    Preview.callback.autoReset = true;  // make sure it can run more than once
-
     window.onload = function() {
+        Preview.callback = MathJax.Callback(["CreatePreview",Preview]);
+        Preview.callback.autoReset = true;  // make sure it can run more than once
+
         Preview.Init();
         updateImageExpression();
     };

@@ -50,12 +50,68 @@
                                 <div class="tab-content">
                                     <div class="tab-pane active" id="trigonometry">
                                         <ul class="nav-list list-inline">
-                                            <li><button class="btn btn-primary" onclick="setLatexValue('\\sin(x)');updateImageExpression();">sin(x)</button></li>
-                                            <li><button class="btn btn-primary" onclick="setLatexValue('\\cos(x)');updateImageExpression();">cos(x)</button></li>
-                                            <li><button class="btn btn-primary" onclick="setLatexValue('\\tan(x)');updateImageExpression();">tg(x)</button></li>
-                                            <li><button class="btn btn-primary" onclick="setLatexValue('\\cot(x)');updateImageExpression();">ctg(x)</button></li>
-                                            <li><button class="btn btn-primary" onclick="setLatexValue('\\arcsin(x)');updateImageExpression();">arcsin(x)</button></li>
-                                            <li><button class="btn btn-primary" onclick="setLatexValue('\\arccos(x)');updateImageExpression();">arccos(x)</button></li>
+                                            <li><button class="btn btn-primary" onclick="setLatexValue('\\sin(x)');updateImageExpression();">$$\sin(x)$$</button></li>
+                                            <li><button class="btn btn-primary" onclick="setLatexValue('\\cos(x)');updateImageExpression();">$$\cos(x)$$</button></li>
+                                            <li><button class="btn btn-primary" onclick="setLatexValue('\\tan(x)');updateImageExpression();">$$\tan(x)$$</button></li>
+                                            <li><button class="btn btn-primary" onclick="setLatexValue('\\cot(x)');updateImageExpression();">$$\cot(x)$$</button></li>
+                                            <li><button class="btn btn-primary" onclick="setLatexValue('\\arcsin(x)');updateImageExpression();">$$\arcsin(x)$$</button></li>
+                                            <li><button class="btn btn-primary" onclick="setLatexValue('\\arccos(x)');updateImageExpression();">$$\arccos(x)$$</button></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="dropdown mega-dropdown">
+                        <a href="#/index" class="dropdown-toggle" data-toggle="dropdown">Fractions and roots <span class="caret"></span></a>
+                        <div class="dropdown-menu mega-dropdown-menu">
+                            <div class="container-fluid">
+                                <!-- Tab panes -->
+                                <div class="tab-content">
+                                    <div class="tab-pane active" id="fractionsAndRoots">
+                                        <ul class="nav-list list-inline">
+                                            <li><button class="btn btn-primary" onclick="setLatexValue('\\frac{a}{b}');updateImageExpression();">$$\frac{a}{b}$$</button></li>
+                                            <li><button class="btn btn-primary" onclick="setLatexValue('\\sqrt{x}');updateImageExpression();">$$\sqrt{x}$$</button></li>
+                                            <li><button class="btn btn-primary" onclick="setLatexValue('\\sqrt[n]{x}');updateImageExpression();">$$\sqrt[n]{x}$$</button></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="dropdown mega-dropdown">
+                        <a href="#/index" class="dropdown-toggle" data-toggle="dropdown">Sum, intersection <span class="caret"></span></a>
+                        <div class="dropdown-menu mega-dropdown-menu">
+                            <div class="container-fluid">
+                                <!-- Tab panes -->
+                                <div class="tab-content">
+                                    <div class="tab-pane active" id="sumIntersection">
+                                        <ul class="nav-list list-inline">
+                                            <li><button class="btn btn-primary" onclick="setLatexValue('\\sum_{n=1}^{k} n');updateImageExpression();">$$\sum_{n=1}^{k} n$$</button></li>
+                                            <li><button class="btn btn-primary" onclick="setLatexValue('\\prod_{n=1}^{k} n');updateImageExpression();">$$\prod_{n=1}^{k} n$$</button></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="dropdown mega-dropdown">
+                        <a href="#/index" class="dropdown-toggle" data-toggle="dropdown">Integrals <span class="caret"></span></a>
+                        <div class="dropdown-menu mega-dropdown-menu">
+                            <div class="container-fluid">
+                                <!-- Tab panes -->
+                                <div class="tab-content">
+                                    <div class="tab-pane active" id="integrals">
+                                        <ul class="nav-list list-inline">
+                                            <li><button class="btn btn-primary" onclick="setLatexValue('\\int');updateImageExpression();">$$\int$$</button></li>
+                                            <li><button class="btn btn-primary" onclick="setLatexValue('\\int\\limits_{a}^{b}');updateImageExpression();">$$\int\limits_{a}^{b}$$</button></li>
+                                            <li><button class="btn btn-primary" onclick="setLatexValue('\\int\\limits_{a}^{b} x dx');updateImageExpression();">$$\int\limits_{a}^{b} x dx$$</button></li>
+                                            <li><button class="btn btn-primary" onclick="setLatexValue('\\iint');updateImageExpression();">$$\iint$$</button></li>
+                                            <li><button class="btn btn-primary" onclick="setLatexValue('\\int\\limits_{a}^{b}\\int\\limits_{c}^{d}');updateImageExpression();">$$\int\limits_{a}^{b}\int\limits_{c}^{d}$$</button></li>
+                                            <li><button class="btn btn-primary" onclick="setLatexValue('\\int\\limits_{a}^{b}\\int\\limits_{c}^{d} (x+y) dx dy');updateImageExpression();">$$\int\limits_{a}^{b}\int\limits_{c}^{d} (x+y) dx dy$$</button></li>
+                                            <li><button class="btn btn-primary" onclick="setLatexValue('\\iiint');updateImageExpression();">$$\iiint$$</button></li>
+                                            <li><button class="btn btn-primary" onclick="setLatexValue('\\int\\limits_{a}^{b}\\int\\limits_{c}^{d}\\int\\limits_{e}^{f}');updateImageExpression();">$$\int\limits_{a}^{b}\int\limits_{c}^{d}\int\limits_{e}^{f}$$</button></li>
+                                            <li><button class="btn btn-primary" onclick="setLatexValue('\\int\\limits_{a}^{b}\\int\\limits_{c}^{d}\\int\\limits_{e}^{f} (x+y+z) dx dy dz');updateImageExpression();">$$\int\limits_{a}^{b}\int\limits_{c}^{d}\int\limits_{e}^{f} (x+y+z) dx dy dz$$</button></li>
                                         </ul>
                                     </div>
                                 </div>

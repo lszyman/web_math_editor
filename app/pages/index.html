@@ -43,6 +43,28 @@
             <div class="collapse navbar-collapse" id="bs-megadropdown-tabs">
                 <ul class="nav navbar-nav">
                     <li class="dropdown mega-dropdown">
+                        <a href="#/index" class="dropdown-toggle" data-toggle="dropdown">Basics <span class="caret"></span></a>
+                        <div class="dropdown-menu mega-dropdown-menu">
+                            <div class="container-fluid">
+                                <!-- Tab panes -->
+                                <div class="tab-content">
+                                    <div class="tab-pane active" id="fractionsAndRoots">
+                                        <ul class="nav-list list-inline">
+                                            <li><button class="btn btn-primary" onclick="setLatexValue('(a+b)');updateImageExpression();">$$(a+b)$$</button></li>
+                                            <li><button class="btn btn-primary" onclick="setLatexValue('(a-b)');updateImageExpression();">$$(a-b)$$</button></li>
+                                            <li><button class="btn btn-primary" onclick="setLatexValue('a*b');updateImageExpression();">$$a*b$$</button></li>
+                                            <li><button class="btn btn-primary" onclick="setLatexValue('\\frac{a}{b}');updateImageExpression();">$$\frac{a}{b}$$</button></li>
+                                            <li><button class="btn btn-primary" onclick="setLatexValue('x^2');updateImageExpression();">$$x^2$$</button></li>
+                                            <li><button class="btn btn-primary" onclick="setLatexValue('x^n');updateImageExpression();">$$x^n$$</button></li>
+                                            <li><button class="btn btn-primary" onclick="setLatexValue('\\sqrt{x}');updateImageExpression();">$$\sqrt{x}$$</button></li>
+                                            <li><button class="btn btn-primary" onclick="setLatexValue('\\sqrt[n]{x}');updateImageExpression();">$$\sqrt[n]{x}$$</button></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="dropdown mega-dropdown">
                         <a href="#/index" class="dropdown-toggle" data-toggle="dropdown">Trigonometry <span class="caret"></span></a>
                         <div class="dropdown-menu mega-dropdown-menu">
                             <div class="container-fluid">
@@ -56,23 +78,6 @@
                                             <li><button class="btn btn-primary" onclick="setLatexValue('\\cot(x)');updateImageExpression();">$$\cot(x)$$</button></li>
                                             <li><button class="btn btn-primary" onclick="setLatexValue('\\arcsin(x)');updateImageExpression();">$$\arcsin(x)$$</button></li>
                                             <li><button class="btn btn-primary" onclick="setLatexValue('\\arccos(x)');updateImageExpression();">$$\arccos(x)$$</button></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="dropdown mega-dropdown">
-                        <a href="#/index" class="dropdown-toggle" data-toggle="dropdown">Fractions and roots <span class="caret"></span></a>
-                        <div class="dropdown-menu mega-dropdown-menu">
-                            <div class="container-fluid">
-                                <!-- Tab panes -->
-                                <div class="tab-content">
-                                    <div class="tab-pane active" id="fractionsAndRoots">
-                                        <ul class="nav-list list-inline">
-                                            <li><button class="btn btn-primary" onclick="setLatexValue('\\frac{a}{b}');updateImageExpression();">$$\frac{a}{b}$$</button></li>
-                                            <li><button class="btn btn-primary" onclick="setLatexValue('\\sqrt{x}');updateImageExpression();">$$\sqrt{x}$$</button></li>
-                                            <li><button class="btn btn-primary" onclick="setLatexValue('\\sqrt[n]{x}');updateImageExpression();">$$\sqrt[n]{x}$$</button></li>
                                         </ul>
                                     </div>
                                 </div>

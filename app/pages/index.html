@@ -48,7 +48,7 @@
                             <div class="container-fluid">
                                 <!-- Tab panes -->
                                 <div class="tab-content">
-                                    <div class="tab-pane active" id="fractionsAndRoots">
+                                    <div class="tab-pane active" id="basicsOperations">
                                         <ul class="nav-list list-inline">
                                             <li><button class="btn btn-primary" onclick="setLatexValue('(a+b)');updateImageExpression();">$$(a+b)$$</button></li>
                                             <li><button class="btn btn-primary" onclick="setLatexValue('(a-b)');updateImageExpression();">$$(a-b)$$</button></li>
@@ -124,55 +124,63 @@
                         </div>
                     </li>
                 </ul>
-                <ul class="nav navbar-nav navbar-right">
-                    <li><a href="#">Link</a></li>
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <span class="caret"></span></a>
-                        <ul class="dropdown-menu" role="menu">
-                            <li><a href="#">Action</a></li>
-                            <li><a href="#">Another action</a></li>
-                            <li><a href="#">Something else here</a></li>
-                            <li class="divider"></li>
-                            <li><a href="#">Separated link</a></li>
-                        </ul>
-                    </li>
+                <ul class="nav navbar-nav navbar-right" id="google-drive-buttons">
+                    <button type="button" class="btn btn-default btn-lg" data-toggle="tooltip" data-placement="bottom" title="Save to Google Drive">
+                        <span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span>
+                    </button>
+
+                    <<button type="button" class="btn btn-default btn-lg" data-toggle="tooltip" data-placement="bottom" title="Open from Google Drive">
+                        <span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span>
+                    </button>
                 </ul>
+                <!--<ul class="nav navbar-nav navbar-right">-->
+                    <!--<li><a href="#">Link</a></li>-->
+                    <!--<li class="dropdown">-->
+                        <!--<a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <span class="caret"></span></a>-->
+                        <!--<ul class="dropdown-menu" role="menu">-->
+                            <!--<li><a href="#">Action</a></li>-->
+                            <!--<li><a href="#">Another action</a></li>-->
+                            <!--<li><a href="#">Something else here</a></li>-->
+                            <!--<li class="divider"></li>-->
+                            <!--<li><a href="#">Separated link</a></li>-->
+                        <!--</ul>-->
+                    <!--</li>-->
+                <!--</ul>-->
             </div><!-- /.navbar-collapse -->
         </div><!-- /.container-fluid -->
     </nav>
 
 <div class="container">
     <div class="jumbotron">
-        <h1>Web Math Editor</h1>
 
         <div ng-view></div>
 
-        <div>
-            <input type="button" id="refreshFilesListButton" class="btn btn-success" value="Get files list">
-            <table class="table table-striped table-condensed" style="display:none" id="filesList">
-                <thead>
-                <tr>
-                    <th>#</th>
-                    <th>name</th>
-                    <th>ID</th>
-                    <th></th>
-                    <th></th>
-                </tr>
-                </thead>
-                <tbody>
-                </tbody>
-            </table>
-        </div>
+        <!--<div>-->
+            <!--<input type="button" id="refreshFilesListButton" class="btn btn-success" value="Get files list">-->
+            <!--<table class="table table-striped table-condensed" style="display:none" id="filesList">-->
+                <!--<thead>-->
+                <!--<tr>-->
+                    <!--<th>#</th>-->
+                    <!--<th>name</th>-->
+                    <!--<th>ID</th>-->
+                    <!--<th></th>-->
+                    <!--<th></th>-->
+                <!--</tr>-->
+                <!--</thead>-->
+                <!--<tbody>-->
+                <!--</tbody>-->
+            <!--</table>-->
+        <!--</div>-->
 
 
-        <label for="fileIdLoadFromGoogleDrive"><b>File Id: </b>
-            <input id="fileIdLoadFromGoogleDrive" type="text" name="fileIdLoadFromGoogleDrive" value="0B47CPHRFDjO-NjVyWTB3a3o3V2s" class="form-control" style="width: 300px">
-            <input type="button" id="loadFromGoogleDrive" value="Load file's content" class="btn btn-primary" onclick="executePrintFile()"/>
-        </label>
+        <!--<label for="fileIdLoadFromGoogleDrive"><b>File Id: </b>-->
+            <!--<input id="fileIdLoadFromGoogleDrive" type="text" name="fileIdLoadFromGoogleDrive" value="0B47CPHRFDjO-NjVyWTB3a3o3V2s" class="form-control" style="width: 300px">-->
+            <!--<input type="button" id="loadFromGoogleDrive" value="Load file's content" class="btn btn-primary" onclick="executePrintFile()"/>-->
+        <!--</label>-->
 
-        <input type="file" id="filePicker" class="btn btn-default" style="display: none" />
+        <!--<input type="file" id="filePicker" class="btn btn-default" style="display: none" />-->
 
-        <input type="button" id="authorizeButton" style="display: none" class="btn btn-primary" value="Save to Google Drive" />
+        <!--<input type="button" id="authorizeButton" style="display: none" class="btn btn-primary" value="Save to Google Drive" />-->
     </div>
 
     <hr>

@@ -56,3 +56,11 @@ body {
     text-align: center;
     width: 100%;
 }
+
+.checkboxEval{
+    text-align: center
+}
+
+#google-drive-buttons {
+    padding-top: 3px;
+}

@@ -65,10 +65,12 @@ var Preview = {
 };
 
 function setLatexValue(latexExpression) {
-    var cursorPos = document.getElementById("mathExpression").selectionStart;
-    var latexTextArea = $('#mathExpression');
-    var latexTextVal = latexTextArea.val();
-    latexTextArea.val(latexTextVal.substring(0, cursorPos) + latexExpression + latexTextVal.substring(cursorPos));
+    $(document).ready(function(){
+        var latexTextArea = $('#mathExpression');
+        var cursorPos = latexTextArea.prop('selectionStart');
+        var latexTextVal = latexTextArea.val();
+        latexTextArea.val(latexTextVal.substring(0, cursorPos) + latexExpression + latexTextVal.substring(cursorPos));
+    });
 }
 
 function updateImageExpression() {

@@ -65,8 +65,10 @@ var Preview = {
 };
 
 function setLatexValue(latexExpression) {
+    var cursorPos = document.getElementById("mathExpression").selectionStart;
     var latexTextArea = $('#mathExpression');
-    latexTextArea.val(latexTextArea.val() + latexExpression);
+    var latexTextVal = latexTextArea.val();
+    latexTextArea.val(latexTextVal.substring(0, cursorPos) + latexExpression + latexTextVal.substring(cursorPos));
 }
 
 function updateImageExpression() {

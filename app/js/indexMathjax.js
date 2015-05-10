@@ -78,3 +78,8 @@ function updateImageExpression() {
         Preview.Update();
     });
 }
+
+function setLatexExpression(latexVal) {
+    setLatexValue(latexVal);
+    updateImageExpression();
+}

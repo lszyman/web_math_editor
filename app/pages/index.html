@@ -129,7 +129,7 @@
                         <span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span>
                     </button>
 
-                    <<button type="button" class="btn btn-default btn-lg" data-toggle="tooltip" data-placement="bottom" title="Open from Google Drive">
+                    <<button type="button" class="btn btn-default btn-lg" data-toggle="modal" data-target="#modalFiles" data-placement="bottom" title="Open from Google Drive">
                         <span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span>
                     </button>
                 </ul>
@@ -155,22 +155,38 @@
 
         <div ng-view></div>
 
-        <!--<div>-->
-            <!--<input type="button" id="refreshFilesListButton" class="btn btn-success" value="Get files list">-->
-            <!--<table class="table table-striped table-condensed" style="display:none" id="filesList">-->
-                <!--<thead>-->
-                <!--<tr>-->
-                    <!--<th>#</th>-->
-                    <!--<th>name</th>-->
-                    <!--<th>ID</th>-->
-                    <!--<th></th>-->
-                    <!--<th></th>-->
-                <!--</tr>-->
-                <!--</thead>-->
-                <!--<tbody>-->
-                <!--</tbody>-->
-            <!--</table>-->
-        <!--</div>-->
+        <div class="modal fade" id="modalFiles" tabindex="-1" role="dialog" aria-labelledby="modalFilesLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content" style="width: 780px">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="modalFilesLabel">Read from file:</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div>
+                            <input type="button" id="refreshFilesListButton" class="btn btn-success" value="Get files list">
+                            <table class="table table-striped table-condensed" style="display:none" id="filesList">
+                                <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>name</th>
+                                    <th>ID</th>
+                                    <th></th>
+                                    <th></th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <!--<button type="button" class="btn btn-primary">Save changes</button>-->
+                    </div>
+                </div>
+            </div>
+        </div>
 
 
         <!--<label for="fileIdLoadFromGoogleDrive"><b>File Id: </b>-->

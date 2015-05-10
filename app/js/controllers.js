@@ -6,7 +6,6 @@ var webMathEditorControllers = angular.module('webMathEditorControllers', []);
 
 webMathEditorControllers.controller('MathEditor', ['$scope', function($scope) {
     $scope.latexValue = function(latexVal) {
-        var updatedLatexValue = setLatexValue(latexVal);
-        updateImageExpression();
+        setLatexExpression(latexVal)
     }
 }]);

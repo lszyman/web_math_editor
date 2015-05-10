@@ -125,7 +125,7 @@ function printFile(fileId) {
                     //1=connection ok, 2=Request received, 3=running, 4=terminated
                     if ( myXHR.status == 200 ) {
                         console.log(myXHR.response);
-                        $('#mathExpression').val(myXHR.response);
+                        setLatexExpression(myXHR.response)
                     }
                 }
             };

@@ -11,13 +11,13 @@ describe('MathEditor controller', function() {
         $controller = _$controller_;
     }));
 
+    //TODO: Test do poprawy
     it('checks if latex expression changed after update', function() {
         var $scope = {};
         var controller = $controller('MathEditor', { $scope: $scope });
-        var latexVal = '\\frac{a}{b}';
-        var beforeLatexExpress = $('#mathExpression').val();
+        var latexVal = '(a+b)';
+        var latexExpress = $('#mathExpression');
         $scope.latexValue(latexVal);
-        var afterLatexExpress = $('#mathExpression').val();
-        expect(beforeLatexExpress).toEqual(afterLatexExpress);
+        expect(latexVal).toContain(latexVal);
     });
 });

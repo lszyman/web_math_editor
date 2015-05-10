@@ -25,7 +25,7 @@
     </script>
 </head>
 
-<body>
+<body ng-controller="MathEditor">
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
         <div class="container">
             <!-- Brand and toggle get grouped for better mobile display -->
@@ -50,14 +50,14 @@
                                 <div class="tab-content">
                                     <div class="tab-pane active" id="basicsOperations">
                                         <ul class="nav-list list-inline">
-                                            <li><button class="btn btn-primary" onclick="setLatexValue('(a+b)');updateImageExpression();">$$(a+b)$$</button></li>
-                                            <li><button class="btn btn-primary" onclick="setLatexValue('(a-b)');updateImageExpression();">$$(a-b)$$</button></li>
-                                            <li><button class="btn btn-primary" onclick="setLatexValue('a*b');updateImageExpression();">$$a*b$$</button></li>
-                                            <li><button class="btn btn-primary" onclick="setLatexValue('\\frac{a}{b}');updateImageExpression();">$$\frac{a}{b}$$</button></li>
-                                            <li><button class="btn btn-primary" onclick="setLatexValue('x^2');updateImageExpression();">$$x^2$$</button></li>
-                                            <li><button class="btn btn-primary" onclick="setLatexValue('x^n');updateImageExpression();">$$x^n$$</button></li>
-                                            <li><button class="btn btn-primary" onclick="setLatexValue('\\sqrt{x}');updateImageExpression();">$$\sqrt{x}$$</button></li>
-                                            <li><button class="btn btn-primary" onclick="setLatexValue('\\sqrt[n]{x}');updateImageExpression();">$$\sqrt[n]{x}$$</button></li>
+                                            <li><button class="btn btn-primary" ng-click="latexValue('(a+b)')">$$(a+b)$$</button></li>
+                                            <li><button class="btn btn-primary" ng-click="latexValue('(a-b)')">$$(a-b)$$</button></li>
+                                            <li><button class="btn btn-primary" ng-click="latexValue('a*b')">$$a*b$$</button></li>
+                                            <li><button class="btn btn-primary" ng-click="latexValue('\\frac{a}{b}')">$$\frac{a}{b}$$</button></li>
+                                            <li><button class="btn btn-primary" ng-click="latexValue('x^2')">$$x^2$$</button></li>
+                                            <li><button class="btn btn-primary" ng-click="latexValue('x^n')">$$x^n$$</button></li>
+                                            <li><button class="btn btn-primary" ng-click="latexValue('\\sqrt{x}')">$$\sqrt{x}$$</button></li>
+                                            <li><button class="btn btn-primary" ng-click="latexValue('\\sqrt[n]{x}')">$$\sqrt[n]{x}$$</button></li>
                                         </ul>
                                     </div>
                                 </div>
@@ -72,12 +72,12 @@
                                 <div class="tab-content">
                                     <div class="tab-pane active" id="trigonometry">
                                         <ul class="nav-list list-inline">
-                                            <li><button class="btn btn-primary" onclick="setLatexValue('\\sin(x)');updateImageExpression();">$$\sin(x)$$</button></li>
-                                            <li><button class="btn btn-primary" onclick="setLatexValue('\\cos(x)');updateImageExpression();">$$\cos(x)$$</button></li>
-                                            <li><button class="btn btn-primary" onclick="setLatexValue('\\tan(x)');updateImageExpression();">$$\tan(x)$$</button></li>
-                                            <li><button class="btn btn-primary" onclick="setLatexValue('\\cot(x)');updateImageExpression();">$$\cot(x)$$</button></li>
-                                            <li><button class="btn btn-primary" onclick="setLatexValue('\\arcsin(x)');updateImageExpression();">$$\arcsin(x)$$</button></li>
-                                            <li><button class="btn btn-primary" onclick="setLatexValue('\\arccos(x)');updateImageExpression();">$$\arccos(x)$$</button></li>
+                                            <li><button class="btn btn-primary" ng-click="latexValue('\\sin(x)')">$$\sin(x)$$</button></li>
+                                            <li><button class="btn btn-primary" ng-click="latexValue('\\cos(x)')">$$\cos(x)$$</button></li>
+                                            <li><button class="btn btn-primary" ng-click="latexValue('\\tan(x)')">$$\tan(x)$$</button></li>
+                                            <li><button class="btn btn-primary" ng-click="latexValue('\\cot(x)')">$$\cot(x)$$</button></li>
+                                            <li><button class="btn btn-primary" ng-click="latexValue('\\arcsin(x)')">$$\arcsin(x)$$</button></li>
+                                            <li><button class="btn btn-primary" ng-click="latexValue('\\arccos(x)')">$$\arccos(x)$$</button></li>
                                         </ul>
                                     </div>
                                 </div>
@@ -92,8 +92,8 @@
                                 <div class="tab-content">
                                     <div class="tab-pane active" id="sumIntersection">
                                         <ul class="nav-list list-inline">
-                                            <li><button class="btn btn-primary" onclick="setLatexValue('\\sum_{n=1}^{k} n');updateImageExpression();">$$\sum_{n=1}^{k} n$$</button></li>
-                                            <li><button class="btn btn-primary" onclick="setLatexValue('\\prod_{n=1}^{k} n');updateImageExpression();">$$\prod_{n=1}^{k} n$$</button></li>
+                                            <li><button class="btn btn-primary" ng-click="latexValue('\\sum_{n=1}^{k} n')">$$\sum_{n=1}^{k} n$$</button></li>
+                                            <li><button class="btn btn-primary" ng-click="latexValue('\\prod_{n=1}^{k} n')">$$\prod_{n=1}^{k} n$$</button></li>
                                         </ul>
                                     </div>
                                 </div>
@@ -108,15 +108,15 @@
                                 <div class="tab-content">
                                     <div class="tab-pane active" id="integrals">
                                         <ul class="nav-list list-inline">
-                                            <li><button class="btn btn-primary" onclick="setLatexValue('\\int');updateImageExpression();">$$\int$$</button></li>
-                                            <li><button class="btn btn-primary" onclick="setLatexValue('\\int\\limits_{a}^{b}');updateImageExpression();">$$\int\limits_{a}^{b}$$</button></li>
-                                            <li><button class="btn btn-primary" onclick="setLatexValue('\\int\\limits_{a}^{b} x dx');updateImageExpression();">$$\int\limits_{a}^{b} x dx$$</button></li>
-                                            <li><button class="btn btn-primary" onclick="setLatexValue('\\iint');updateImageExpression();">$$\iint$$</button></li>
-                                            <li><button class="btn btn-primary" onclick="setLatexValue('\\int\\limits_{a}^{b}\\int\\limits_{c}^{d}');updateImageExpression();">$$\int\limits_{a}^{b}\int\limits_{c}^{d}$$</button></li>
-                                            <li><button class="btn btn-primary" onclick="setLatexValue('\\int\\limits_{a}^{b}\\int\\limits_{c}^{d} (x+y) dx dy');updateImageExpression();">$$\int\limits_{a}^{b}\int\limits_{c}^{d} (x+y) dx dy$$</button></li>
-                                            <li><button class="btn btn-primary" onclick="setLatexValue('\\iiint');updateImageExpression();">$$\iiint$$</button></li>
-                                            <li><button class="btn btn-primary" onclick="setLatexValue('\\int\\limits_{a}^{b}\\int\\limits_{c}^{d}\\int\\limits_{e}^{f}');updateImageExpression();">$$\int\limits_{a}^{b}\int\limits_{c}^{d}\int\limits_{e}^{f}$$</button></li>
-                                            <li><button class="btn btn-primary" onclick="setLatexValue('\\int\\limits_{a}^{b}\\int\\limits_{c}^{d}\\int\\limits_{e}^{f} (x+y+z) dx dy dz');updateImageExpression();">$$\int\limits_{a}^{b}\int\limits_{c}^{d}\int\limits_{e}^{f} (x+y+z) dx dy dz$$</button></li>
+                                            <li><button class="btn btn-primary" ng-click="latexValue('\\int')">$$\int$$</button></li>
+                                            <li><button class="btn btn-primary" ng-click="latexValue('\\int\\limits_{a}^{b}')">$$\int\limits_{a}^{b}$$</button></li>
+                                            <li><button class="btn btn-primary" ng-click="latexValue('\\int\\limits_{a}^{b} x dx')">$$\int\limits_{a}^{b} x dx$$</button></li>
+                                            <li><button class="btn btn-primary" ng-click="latexValue('\\iint')">$$\iint$$</button></li>
+                                            <li><button class="btn btn-primary" ng-click="latexValue('\\int\\limits_{a}^{b}\\int\\limits_{c}^{d}')">$$\int\limits_{a}^{b}\int\limits_{c}^{d}$$</button></li>
+                                            <li><button class="btn btn-primary" ng-click="latexValue('\\int\\limits_{a}^{b}\\int\\limits_{c}^{d} (x+y) dx dy')">$$\int\limits_{a}^{b}\int\limits_{c}^{d} (x+y) dx dy$$</button></li>
+                                            <li><button class="btn btn-primary" ng-click="latexValue('\\iiint')">$$\iiint$$</button></li>
+                                            <li><button class="btn btn-primary" ng-click="latexValue('\\int\\limits_{a}^{b}\\int\\limits_{c}^{d}\\int\\limits_{e}^{f}')">$$\int\limits_{a}^{b}\int\limits_{c}^{d}\int\limits_{e}^{f}$$</button></li>
+                                            <li><button class="btn btn-primary" ng-click="latexValue('\\int\\limits_{a}^{b}\\int\\limits_{c}^{d}\\int\\limits_{e}^{f} (x+y+z) dx dy dz')">$$\int\limits_{a}^{b}\int\limits_{c}^{d}\int\limits_{e}^{f} (x+y+z) dx dy dz$$</button></li>
                                         </ul>
                                     </div>
                                 </div>

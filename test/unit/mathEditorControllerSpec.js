@@ -11,11 +11,13 @@ describe('MathEditor controller', function() {
         $controller = _$controller_;
     }));
 
-    it('checks if math expression is equals 10', function() {
+    it('checks if latex expression changed after update', function() {
         var $scope = {};
         var controller = $controller('MathEditor', { $scope: $scope });
-        var expression = '(( 1 + 3 ) * 4 + 4) / 2';
-        var res = $scope.mathExpression(expression);
-        expect(res).toEqual(10);
+        var latexVal = '\\frac{a}{b}';
+        var beforeLatexExpress = $('#mathExpression').val();
+        $scope.latexValue(latexVal);
+        var afterLatexExpress = $('#mathExpression').val();
+        expect(beforeLatexExpress).toEqual(afterLatexExpress);
     });
 });

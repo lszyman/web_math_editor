@@ -45,7 +45,13 @@ var Preview = {
     CreatePreview: function () {
         Preview.timeout = null;
         if (this.mjRunning) return;
-        var text = "$$" + document.getElementById("mathExpression").value + "$$";
+
+        if($("#checkBoxEvaluateExpression").prop('checked')) {
+            var text = "$$" + document.getElementById("MathResultPreview").value + "$$";
+        } else {
+            var text = "$$" + document.getElementById("mathExpression").value + "$$";
+        }
+
         if (text === this.oldtext) return;
         this.buffer.innerHTML = this.oldtext = text;
         this.mjRunning = true;
@@ -70,11 +76,15 @@ function setLatexValue(latexExpression) {
         var cursorPos = latexTextArea.prop('selectionStart');
         var latexTextVal = latexTextArea.val();
         latexTextArea.val(latexTextVal.substring(0, cursorPos) + latexExpression + latexTextVal.substring(cursorPos));
+
+        var latexResultTextArea = $('#MathResultPreview');
+        var latexResultTextVal = latexTextArea.val(); //TODO: evaluate latexTextArea.val()
+        latexResultTextArea.val(latexResultTextVal);
     });
 }
 
 function updateImageExpression() {
-    $('#mathExpression').livequery(function() {
+    $('#mathExpression').livequery(function () {
         Preview.Update();
     });
 }

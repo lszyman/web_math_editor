@@ -4,7 +4,7 @@
 <div id="MathBuffer" style="border:1px solid; padding: 3px; margin-top:5px;
 visibility:hidden; position:absolute; top:0; left: 0"></div>
 <div class="checkboxEval">
-        <input type="checkbox" > Evaluate expression
+        <input type="checkbox" id="checkBoxEvaluateExpression"> Evaluate expression
 </div>
 <div>
 <label for="mathExpression"><b>LATEX Expression: </b></label>
@@ -13,5 +13,5 @@ visibility:hidden; position:absolute; top:0; left: 0"></div>
 <br>
 
 <label for="MathResultPreview"><b>LATEX Evaluated Expression:</b></label>
-<textarea class="form-control" rows="5" id="MathResultPreview" onkeyup="Preview.Update()">x = {-b \pm \sqrt{b^2-4ac} \over 2a}</textarea>
+<textarea readonly="true" class="form-control" rows="5" id="MathResultPreview">x = {-b \pm \sqrt{b^2-4ac} \over 2a}</textarea>
 </div>

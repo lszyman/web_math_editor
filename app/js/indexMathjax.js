@@ -77,14 +77,14 @@ function setLatexValue(latexExpression) {
         var latexTextVal = latexTextArea.val();
         latexTextArea.val(latexTextVal.substring(0, cursorPos) + latexExpression + latexTextVal.substring(cursorPos));
 
-        updateEvaluatedExpression();
+        updateEvaluatedExpression(latexTextArea);
     });
 }
 
 function updateImageExpression() {
-    //$('#mathExpression').livequery(function () {
-    Preview.Update();
-    //});
+    $('#mathExpression').livequery(function () {
+        Preview.Update();
+    });
 }
 
 function updateEvaluatedExpression(latexTextArea) {
@@ -111,12 +111,11 @@ function evaluateLatexExpression(latexExpr) {
         beforeResult = "";
         while (beforeResult != result) {
             beforeResult = result;
-            result = evaluateOneTypeExpr(result, /(\d+)\^(\d+)/, "^", parser);
-            result = evaluateOneTypeExpr(result, /\\sqrt{(\d+)}/, "sqrt", parser);
-            result = evaluateOneTypeExpr(result, /(\d+)\*(\d+)/, "*", parser);
-            result = evaluateOneTypeExpr(result, /\\frac{(\d+)}{(\d+)}/, "/", parser);
-            result = evaluateOneTypeExpr(result, /(\d+)\+(\d+)/, "+", parser);
-            result = evaluateOneTypeExpr(result, /(\d+)-(\d+)/, "-", parser);
+            result = removeParenthesis(result, parser);
+            result = evaluateOneTypeExpr(result, /\s*(\d+(\.\d+)?)\s*\^\s*(\d+(\.\d+)?)\s*/, "^", /\s*\\sqrt\s*\{\s*(\d+(\.\d+)?)\s*}\s*/, "sqrt", parser);
+            result = evaluateOneTypeExpr(result, /\s*(\d+(\.\d+)?)\s*\*\s*(\d+(\.\d+)?)\s*/, "*", /\s*\\frac\s*\{\s*(\d+(\.\d+)?)\s*}\s*\{\s*(\d+(\.\d+)?)\s*}\s*/, "/", parser);
+            result = evaluateOneTypeExpr(result, /\s*\{\s*(\d+(\.\d+)?)\s*\\over\s*(\d+(\.\d+)?)\s*}\s*/, "/", /\s*\{\s*(\d+(\.\d+)?)\s*\\over\s*(\d+(\.\d+)?)\s*}\s*/, "/", parser);
+            result = evaluateOneTypeExpr(result, /([^a-z])\s*(\d+(\.\d+)?)\s*\+\s*(\d+(\.\d+)?)\s*([^a-z])/i, "+", /([^a-z])\s*(\d+(\.\d+)?)\s*-\s*(\d+(\.\d+)?)\s*([^a-z])/i, "-", parser);
         }
     } else {
         return "0";
@@ -125,13 +124,44 @@ function evaluateLatexExpression(latexExpr) {
     return result;
 }
 
-function evaluateOneTypeExpr(input, regex, operation, parser) {
+function evaluateOneTypeExpr(input, regex1, operation1, regex2, operation2, parser) {
     var match;
+    var operation;
+    var regex;
+    var index1 = input.search(regex1);
+    var index2 = input.search(regex2);
+    while (index1 >= 0 || index2 >=0) {
+        if (index1 == -1 || (index2 != -1 && index2 < index1)) {
+            operation = operation2;
+            regex = regex2;
+        } else if(index2 == -1 || (index1 != -1 && index1 <= index2)) {
+            operation = operation1;
+            regex = regex1;
+        }
+
+        match = regex.exec(input);
+
+        if (operation == "sqrt") {
+            input = input.replace(regex, parser.eval(operation + "(" + match[1] + ")"));
+        } else if (operation == "()") {
+            input = input.replace(regex, parser.eval(match[1]));
+        } else if (operation == "+" || operation == "-") {
+            input = input.replace(regex, match[1] + parser.eval(match[2] + operation + match[4]) + match[6]);
+        } else {
+            input = input.replace(regex, parser.eval(match[1] + operation + match[3]));
+        }
+
+        index1 = input.search(regex1);
+        index2 = input.search(regex2);
+    }
+    return input;
+}
+
+function removeParenthesis(input, parser) {
+    var match;
+    var regex = /\s*\(\s*(\d+(\.\d+)?)\s*\)\s*/;
     while (match = regex.exec(input)) {
-        if(operation != "sqrt")
-            input = input.replace(regex, parser.eval(match[1]+operation+match[2]));
-        else
-            input = input.replace(regex, parser.eval(operation+"("+match[1]+")"));
+        input = input.replace(regex, parser.eval(match[1]));
     }
     return input;
 }

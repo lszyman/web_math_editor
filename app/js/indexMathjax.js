@@ -67,8 +67,10 @@ var Preview = {
 function setLatexValue(latexExpression) {
     $(document).ready(function(){
         var latexTextArea = $('#mathExpression');
-        if (selectedExpression != '' && $("#MathPreview .hl-exp").length) {
+        if (selectedExpression != '') {
             latexTextArea.val(latexTextArea.val().replace(selectedExpression, latexExpression));
+            selectedElements = [];
+            selectedExpression = '';
         } else {
             var cursorPos = latexTextArea.prop('selectionStart');
             var latexTextVal = latexTextArea.val();

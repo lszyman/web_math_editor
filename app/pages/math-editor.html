@@ -1,3 +1,7 @@
+<script type="text/javascript">
+    selectedElements = [];
+    selectedExpression = "";
+</script>
 
 <label for="MathPreview"><b>IMAGE Expression:</b></label>
 <div id="MathPreview" style="border:1px solid; padding: 3px; margin-top:5px"></div>
@@ -8,10 +12,41 @@ visibility:hidden; position:absolute; top:0; left: 0"></div>
 </div>
 <div>
 <label for="mathExpression"><b>LATEX Expression: </b></label>
-<textarea class="form-control" rows="5" id="mathExpression" onkeyup="Preview.Update()">x = {-b \pm \sqrt{b^2-4ac} \over 2a}</textarea>
+<textarea class="form-control" rows="5" id="mathExpression" onkeyup="Preview.Update()">x = {-b \pm \sqrt{!2-!3} \over !1}</textarea>
 
 <br>
 
 <label for="MathResultPreview"><b>LATEX Evaluated Expression:</b></label>
 <textarea class="form-control" rows="5" id="MathResultPreview" onkeyup="Preview.Update()">x = {-b \pm \sqrt{b^2-4ac} \over 2a}</textarea>
 </div>
+
+
+<style type="text/css">
+        .hl-exp {
+                background-color: red;
+        }
+</style>
+
+<script type="text/javascript">
+        $(function() {
+                $(document).on("click", ".MathJax", function (event) {
+                        var element = $(event.target);
+
+                        if (element.hasClass("mn")) { // the second element was clicked
+                                element = element.prev();
+                        }
+
+                        if (element.hasClass("mo")) {
+                                console.log("weszlo a " + element.next());
+                                if (element.next().hasClass("mn")) {
+                                        var tagName = element.text() + element.next().text();
+                                        console.log(tagName);
+                                        $(".hl-exp").removeClass("hl-exp");
+                                        $(element).add(element.next()).addClass("hl-exp");
+                                    selectedElements = [element, element.next()];
+                                    selectedExpression = tagName;
+                                }
+                        }
+                });
+        });
+</script>

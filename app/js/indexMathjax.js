@@ -67,9 +67,13 @@ var Preview = {
 function setLatexValue(latexExpression) {
     $(document).ready(function(){
         var latexTextArea = $('#mathExpression');
-        var cursorPos = latexTextArea.prop('selectionStart');
-        var latexTextVal = latexTextArea.val();
-        latexTextArea.val(latexTextVal.substring(0, cursorPos) + latexExpression + latexTextVal.substring(cursorPos));
+        if (selectedExpression != '' && $("#MathPreview .hl-exp").length) {
+            latexTextArea.val(latexTextArea.val().replace(selectedExpression, latexExpression));
+        } else {
+            var cursorPos = latexTextArea.prop('selectionStart');
+            var latexTextVal = latexTextArea.val();
+            latexTextArea.val(latexTextVal.substring(0, cursorPos) + latexExpression + latexTextVal.substring(cursorPos));
+        }
     });
 }
 

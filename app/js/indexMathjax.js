@@ -77,19 +77,61 @@ function setLatexValue(latexExpression) {
         var latexTextVal = latexTextArea.val();
         latexTextArea.val(latexTextVal.substring(0, cursorPos) + latexExpression + latexTextVal.substring(cursorPos));
 
-        var latexResultTextArea = $('#MathResultPreview');
-        var latexResultTextVal = latexTextArea.val(); //TODO: evaluate latexTextArea.val()
-        latexResultTextArea.val(latexResultTextVal);
+        updateEvaluatedExpression();
     });
 }
 
 function updateImageExpression() {
-    $('#mathExpression').livequery(function () {
-        Preview.Update();
-    });
+    //$('#mathExpression').livequery(function () {
+    Preview.Update();
+    //});
+}
+
+function updateEvaluatedExpression(latexTextArea) {
+    var latexResultTextArea = $('#MathResultPreview');
+    var latexResultTextVal = evaluateLatexExpression(latexTextArea.val());
+    latexResultTextArea.val(latexResultTextVal);
 }
 
 function setLatexExpression(latexVal) {
     setLatexValue(latexVal);
     updateImageExpression();
+}
+
+function onInputLatexExpr() {
+    var latexTextArea = $('#mathExpression');
+    updateEvaluatedExpression(latexTextArea);
+    updateImageExpression();
+}
+
+function evaluateLatexExpression(latexExpr) {
+    var parser = math.parser();
+    var result = latexExpr
+    if(latexExpr != null) {
+        beforeResult = "";
+        while (beforeResult != result) {
+            beforeResult = result;
+            result = evaluateOneTypeExpr(result, /(\d+)\^(\d+)/, "^", parser);
+            result = evaluateOneTypeExpr(result, /\\sqrt{(\d+)}/, "sqrt", parser);
+            result = evaluateOneTypeExpr(result, /(\d+)\*(\d+)/, "*", parser);
+            result = evaluateOneTypeExpr(result, /\\frac{(\d+)}{(\d+)}/, "/", parser);
+            result = evaluateOneTypeExpr(result, /(\d+)\+(\d+)/, "+", parser);
+            result = evaluateOneTypeExpr(result, /(\d+)-(\d+)/, "-", parser);
+        }
+    } else {
+        return "0";
+    }
+
+    return result;
+}
+
+function evaluateOneTypeExpr(input, regex, operation, parser) {
+    var match;
+    while (match = regex.exec(input)) {
+        if(operation != "sqrt")
+            input = input.replace(regex, parser.eval(match[1]+operation+match[2]));
+        else
+            input = input.replace(regex, parser.eval(operation+"("+match[1]+")"));
+    }
+    return input;
 }

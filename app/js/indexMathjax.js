@@ -115,7 +115,7 @@ function evaluateLatexExpression(latexExpr) {
             result = evaluateOneTypeExpr(result, /\s*(\d+(\.\d+)?)\s*\^\s*(\d+(\.\d+)?)\s*/, "^", /\s*\\sqrt\s*\{\s*(\d+(\.\d+)?)\s*}\s*/, "sqrt", parser);
             result = evaluateOneTypeExpr(result, /\s*(\d+(\.\d+)?)\s*\*\s*(\d+(\.\d+)?)\s*/, "*", /\s*\\frac\s*\{\s*(\d+(\.\d+)?)\s*}\s*\{\s*(\d+(\.\d+)?)\s*}\s*/, "/", parser);
             result = evaluateOneTypeExpr(result, /\s*\{\s*(\d+(\.\d+)?)\s*\\over\s*(\d+(\.\d+)?)\s*}\s*/, "/", /\s*\{\s*(\d+(\.\d+)?)\s*\\over\s*(\d+(\.\d+)?)\s*}\s*/, "/", parser);
-            result = evaluateOneTypeExpr(result, /([^a-z])\s*(\d+(\.\d+)?)\s*\+\s*(\d+(\.\d+)?)\s*([^a-z])/i, "+", /([^a-z])\s*(\d+(\.\d+)?)\s*-\s*(\d+(\.\d+)?)\s*([^a-z])/i, "-", parser);
+            result = evaluateOneTypeExpr(result, /([^a-z-\+])\s*(\d+(\.\d+)?)\s*\+\s*(\d+(\.\d+)?)\s*([^a-z])/i, "+", /([^a-z-\+])\s*(\d+(\.\d+)?)\s*-\s*(\d+(\.\d+)?)\s*([^a-z])/i, "-", parser);
         }
     } else {
         return "0";
@@ -141,6 +141,15 @@ function evaluateOneTypeExpr(input, regex1, operation1, regex2, operation2, pars
 
         match = regex.exec(input);
 
+        if(match.length == 1)
+            console.log(operation +" === "+match[1]);
+        else if(match.length == 2)
+            console.log(operation +" === "+match[1]+" : "+match[2]);
+        else if(match.length == 3)
+        console.log(operation +" === "+match[1]+" : "+match[2]+" : "+match[3]);
+        else
+            console.log(operation +" === "+match[1]+" : "+match[2]+" : "+match[3]+" : "+match[4]+" : "+match[5]);
+
         if (operation == "sqrt") {
             input = input.replace(regex, parser.eval(operation + "(" + match[1] + ")"));
         } else if (operation == "()") {
@@ -150,6 +159,8 @@ function evaluateOneTypeExpr(input, regex1, operation1, regex2, operation2, pars
         } else {
             input = input.replace(regex, parser.eval(match[1] + operation + match[3]));
         }
+
+        console.log(input);
 
         index1 = input.search(regex1);
         index2 = input.search(regex2);

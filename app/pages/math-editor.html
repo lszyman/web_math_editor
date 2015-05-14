@@ -8,7 +8,7 @@ visibility:hidden; position:absolute; top:0; left: 0"></div>
 </div>
 <div>
 <label for="mathExpression"><b>LATEX Expression: </b></label>
-<textarea class="form-control" rows="5" id="mathExpression" onkeyup="onInputLatexExpr()">x = {-b \pm \sqrt{3^2-4ac} \over 2a}</textarea>
+<textarea class="form-control" rows="5" id="mathExpression" ng-model="mathExp" ng-change="updatePreview()" onkeyup="onInputLatexExpr()"></textarea>
 
 <br>
 
@@ -18,6 +18,6 @@ visibility:hidden; position:absolute; top:0; left: 0"></div>
 
 <script>
     $("#checkBoxEvaluateExpression").click(function(){
-        onInputLatexExpr()
+        onInputLatexExpr();
     })
 </script>

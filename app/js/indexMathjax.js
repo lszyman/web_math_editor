@@ -113,9 +113,12 @@ function evaluateLatexExpression(latexExpr) {
             beforeResult = result;
             result = removeParenthesis(result, parser);
             result = evaluateOneTypeExpr(result, /\s*(\d+(\.\d+)?)\s*\^\s*(\d+(\.\d+)?)\s*/, "^", /\s*\\sqrt\s*\{\s*(\d+(\.\d+)?)\s*}\s*/, "sqrt", parser);
+            if(beforeResult != result) {continue;}
             result = evaluateOneTypeExpr(result, /\s*(\d+(\.\d+)?)\s*\*\s*(\d+(\.\d+)?)\s*/, "*", /\s*\\frac\s*\{\s*(\d+(\.\d+)?)\s*}\s*\{\s*(\d+(\.\d+)?)\s*}\s*/, "/", parser);
+            if(beforeResult != result) {continue;}
             result = evaluateOneTypeExpr(result, /\s*\{\s*(\d+(\.\d+)?)\s*\\over\s*(\d+(\.\d+)?)\s*}\s*/, "/", /\s*\{\s*(\d+(\.\d+)?)\s*\\over\s*(\d+(\.\d+)?)\s*}\s*/, "/", parser);
-            result = evaluateOneTypeExpr(result, /([^a-z-\+])\s*(\d+(\.\d+)?)\s*\+\s*(\d+(\.\d+)?)\s*([^a-z])/i, "+", /([^a-z-\+])\s*(\d+(\.\d+)?)\s*-\s*(\d+(\.\d+)?)\s*([^a-z])/i, "-", parser);
+            if(beforeResult != result) {continue;}
+            result = evaluateOneTypeExpr(result, /([^a-z-\+]|^)\s*(\d+(\.\d+)?)\s*\+\s*(\d+(\.\d+)?)\s*([^a-z\^\*]|$)/i, "+", /([^a-z-\+]|^)\s*(\d+(\.\d+)?)\s*-\s*(\d+(\.\d+)?)\s*([^a-z\^\*]|$)/i, "-", parser);
         }
     } else {
         return "0";

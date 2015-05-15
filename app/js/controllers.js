@@ -14,7 +14,7 @@ webMathEditorControllers.controller('MathEditor', ['$scope', function($scope) {
     };
 
     $scope.updatePreview = function() {
-        Preview.Update();
+        onInputLatexExpr();
     };
 
 }]);

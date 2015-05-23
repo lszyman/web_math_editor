@@ -1,7 +1,7 @@
 //CLIENT_ID - heroku
-//var CLIENT_ID = '223087526287-k0h09nr6ah0ebbsdunaugel5bodnt3uh.apps.googleusercontent.com';
+var CLIENT_ID = '223087526287-k0h09nr6ah0ebbsdunaugel5bodnt3uh.apps.googleusercontent.com';
 //var CLIENT_ID = '158326088006-mm87jap1ulid7jq23dsp23hvgg7gf4mq.apps.googleusercontent.com'; // Aleksander
-var CLIENT_ID = '223087526287-j631u4mj7s6g7rptvplu4457i0igvojh.apps.googleusercontent.com';
+//var CLIENT_ID = '223087526287-j631u4mj7s6g7rptvplu4457i0igvojh.apps.googleusercontent.com';
 var SCOPES = 'https://www.googleapis.com/auth/drive';
 
 /**

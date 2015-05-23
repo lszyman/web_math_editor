@@ -17,6 +17,12 @@ function handleClientLoad() {
 function checkAuth() {
     gapi.auth.authorize(
         {'client_id': CLIENT_ID, 'scope': SCOPES, 'immediate': true},
+        function(){});
+}
+
+function sendFileToGoogleDrive() {
+    gapi.auth.authorize(
+        {'client_id': CLIENT_ID, 'scope': SCOPES, 'immediate': true},
         handleAuthResult);
 }
 
@@ -26,35 +32,15 @@ function checkAuth() {
  * @param {Object} authResult Authorization result.
  */
 function handleAuthResult(authResult) {
-    var authButton = document.getElementById('authorizeButton');
-    var filePicker = document.getElementById('filePicker');
-    authButton.style.display = 'none';
-    filePicker.style.display = 'none';
     if (authResult && !authResult.error) {
         // Access token has been successfully retrieved, requests can be sent to the API.
-        filePicker.style.display = 'block';
-        filePicker.onchange = uploadFile;
-    } else {
-        // No access token could be retrieved, show the button to start the authorization flow.
-        authButton.style.display = 'block';
-        authButton.onclick = function() {
-            gapi.auth.authorize(
-                {'client_id': CLIENT_ID, 'scope': SCOPES, 'immediate': false},
-                handleAuthResult);
-        };
+        var fileContent = document.getElementById('mathExpression').value;
+        var myBlob = new Blob([fileContent], {type : 'text/plain'});
+        gapi.client.load('drive', 'v2', function() {
+            insertFile(myBlob);
+            alert("File successfully saved.");
+        });
     }
-}
-
-/**
- * Start the file upload.
- *
- * @param {Object} evt Arguments from the file selector.
- */
-function uploadFile(evt) {
-    gapi.client.load('drive', 'v2', function() {
-        var file = evt.target.files[0];
-        insertFile(file);
-    });
 }
 
 /**

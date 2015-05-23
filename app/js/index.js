@@ -1,7 +1,7 @@
 //CLIENT_ID - heroku
-var CLIENT_ID = '223087526287-k0h09nr6ah0ebbsdunaugel5bodnt3uh.apps.googleusercontent.com';
+//var CLIENT_ID = '223087526287-k0h09nr6ah0ebbsdunaugel5bodnt3uh.apps.googleusercontent.com';
 //var CLIENT_ID = '158326088006-mm87jap1ulid7jq23dsp23hvgg7gf4mq.apps.googleusercontent.com'; // Aleksander
-//var CLIENT_ID = '223087526287-j631u4mj7s6g7rptvplu4457i0igvojh.apps.googleusercontent.com';
+var CLIENT_ID = '223087526287-j631u4mj7s6g7rptvplu4457i0igvojh.apps.googleusercontent.com';
 var SCOPES = 'https://www.googleapis.com/auth/drive';
 
 /**
@@ -40,6 +40,10 @@ function handleAuthResult(authResult) {
             insertFile(myBlob);
             alert("File successfully saved.");
         });
+    } else {
+        gapi.auth.authorize(
+            {'client_id': CLIENT_ID, 'scope': SCOPES, 'immediate': false},
+            handleAuthResult);
     }
 }
 
@@ -120,38 +124,50 @@ function printFile(fileId) {
     });
 }
 
-function executePrintFile() {
-    var fileId = $('#fileIdLoadFromGoogleDrive').val();
-    printFile(fileId)
-}
+//function executePrintFile() {
+//    var fileId = $('#fileIdLoadFromGoogleDrive').val();
+//    printFile(fileId)
+//}
 
+function retrieveFileFromGoogleDrive() {
+    gapi.auth.authorize(
+        {'client_id': CLIENT_ID, 'scope': SCOPES, 'immediate': true},
+        retrieveAllFiles);
+}
 
 /**
  * Retrieve a list of File resources.
  *
  * @param {Function} callback Function to call when the request is complete.
  */
-function retrieveAllFiles() {
-    var request = gapi.client.request({
-        'path': '/drive/v2/files',
-        'method': 'GET',
-        'callback': function(result) {
+function retrieveAllFiles(authResult) {
+    if (authResult && !authResult.error) {
+        var request = gapi.client.request({
+            'path': '/drive/v2/files?q=\'root\' in parents',
+            'method': 'GET',
+            'callback': function (result) {
 
 
-            var tableCode = "";
-            for (var i = 0; i < result.items.length; i++) {
-                var item = result.items[i];
-                tableCode += "<tr><td>"  + i + "</td><td>" + item.title + "</td><td>" + item.id + "</td>" +
-                "<td class='openFile' style='cursor:pointer' data-file='" + item.id + "'>" +
-                "<span class='glyphicon glyphicon-eye-open' aria-hidden='true'></span></td>" +
-                "<td class='deleteFile' style='cursor:pointer' data-file='" + item.id + "'>" +
-                "<span class='glyphicon glyphicon-remove' aria-hidden='true'></span></td></tr>";
+                var tableCode = "";
+                for (var i = 0; i < result.items.length; i++) {
+                    var item = result.items[i];
+                    tableCode += "<tr><td>" + i + "</td><td>" + item.title + "</td><td>" + item.id + "</td>" +
+                    "<td class='openFile' style='cursor:pointer' data-file='" + item.id + "'>" +
+                    "<span class='glyphicon glyphicon-eye-open' aria-hidden='true'></span></td>" +
+                    "<td class='deleteFile' style='cursor:pointer' data-file='" + item.id + "'>" +
+                    "<span class='glyphicon glyphicon-remove' aria-hidden='true'></span></td></tr>";
+                }
+
+                $("#filesList").css("display", "block");
+                $("#filesList > tbody").html(tableCode);
             }
-
-            $("#filesList").css("display", "block");
-            $("#filesList > tbody").html(tableCode);
-        }
-    });
+        });
+    } else {
+        $("#closeModalFiles").click();
+        gapi.auth.authorize(
+            {'client_id': CLIENT_ID, 'scope': SCOPES, 'immediate': false},
+            retrieveAllFiles);
+    }
 }
 
 function deleteFile(fileId) {

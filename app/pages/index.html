@@ -220,14 +220,12 @@
 <script type="text/javascript" src="https://apis.google.com/js/client.js?onload=handleClientLoad"></script>
 <script>
     $(function() {
-        $("#refreshFilesListButton").click(function(event) {
-            retrieveAllFiles(function(result) {
-                console.log(result);
-            });
+        $("#refreshFilesListButton").click(function() {
+            retrieveFileFromGoogleDrive();
         });
 
-        $("#openGoogleDriveButton").click(function(event) {
-            retrieveAllFiles();
+        $("#openGoogleDriveButton").click(function() {
+            retrieveFileFromGoogleDrive();
         });
 
         $("#saveGoogleDriveButton").click(function() {

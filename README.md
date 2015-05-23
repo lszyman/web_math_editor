@@ -5,7 +5,20 @@
 - Instalacja bower (`npm install -g bower`)
 - Sciagniecie zaleznosci (`npm install`)
 - Uruchomienie aplikacji (`npm start`)
-- Uruchomienie testow (`npm test`)
+
+## Uruchomienie testow
+
+- protractor:  
+`npm start`  
+`npm run protractor`
+
+- unit:  
+`npm test`
+
+## Uruchomienie aplikacji za pomoca foreman
+ 
+`foreman start`  
+(Strona glowna dostepna pod adresem http://localhost:5000/)
 
 ## Strona glowna dostepna pod adresem (lokalnie):
 

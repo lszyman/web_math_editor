@@ -1,8 +1,10 @@
 //CLIENT_ID - heroku
-var CLIENT_ID = '223087526287-k0h09nr6ah0ebbsdunaugel5bodnt3uh.apps.googleusercontent.com';
-//var CLIENT_ID = '158326088006-mm87jap1ulid7jq23dsp23hvgg7gf4mq.apps.googleusercontent.com'; // Aleksander
+//var CLIENT_ID = '223087526287-k0h09nr6ah0ebbsdunaugel5bodnt3uh.apps.googleusercontent.com';
+var CLIENT_ID = '158326088006-mm87jap1ulid7jq23dsp23hvgg7gf4mq.apps.googleusercontent.com'; // Aleksander
 //var CLIENT_ID = '223087526287-j631u4mj7s6g7rptvplu4457i0igvojh.apps.googleusercontent.com';
 var SCOPES = 'https://www.googleapis.com/auth/drive';
+
+var fileId = null;
 
 /**
  * Called when the client library is loaded to start the auth flow.
@@ -20,22 +22,28 @@ function checkAuth() {
         function(){});
 }
 
-function sendFileToGoogleDrive() {
+function saveFileOnGoogleDrive(fileName) {
     gapi.auth.authorize(
         {'client_id': CLIENT_ID, 'scope': SCOPES, 'immediate': true},
-        handleAuthResult);
+        function (result) {
+            handleAuthResult(result, fileName);
+        });
 }
 
 /**
  * Called when authorization server replies.
  *
  * @param {Object} authResult Authorization result.
+ * @param fileName name of the file
  */
-function handleAuthResult(authResult) {
+function handleAuthResult(authResult, fileName) {
     if (authResult && !authResult.error) {
         // Access token has been successfully retrieved, requests can be sent to the API.
         var fileContent = document.getElementById('mathExpression').value;
         var myBlob = new Blob([fileContent], {type : 'text/plain'});
+        myBlob.name = fileName;
+        myBlob.fileId = fileId;
+
         gapi.client.load('drive', 'v2', function() {
             insertFile(myBlob);
             alert("File successfully saved.");
@@ -51,9 +59,8 @@ function handleAuthResult(authResult) {
  * Insert new file.
  *
  * @param {File} fileData File object to read data from.
- * @param {Function} callback Function to call when the request is complete.
  */
-function insertFile(fileData, callback) {
+function insertFile(fileData) {
     const boundary = '-------314159265358979323846';
     const delimiter = "\r\n--" + boundary + "\r\n";
     const close_delim = "\r\n--" + boundary + "--";
@@ -63,7 +70,7 @@ function insertFile(fileData, callback) {
     reader.onload = function(e) {
         var contentType = fileData.type || 'application/octet-stream';
         var metadata = {
-            'title': fileData.name,
+            //'title': fileData.name,
             'mimeType': contentType
         };
 
@@ -79,19 +86,24 @@ function insertFile(fileData, callback) {
             base64Data +
             close_delim;
 
+        var requestPath = '/upload/drive/v2/files';
+        if (fileData.fileId != null) {
+            requestPath += "/" + fileData.fileId;
+        }
+
         var request = gapi.client.request({
-            'path': '/upload/drive/v2/files',
-            'method': 'POST',
+            'path': requestPath,
+            'method': fileData.fileId ? "PUT" : "POST",
             'params': {'uploadType': 'multipart'},
             'headers': {
                 'Content-Type': 'multipart/mixed; boundary="' + boundary + '"'
             },
             'body': multipartRequestBody});
-        if (!callback) {
-            callback = function(file) {
-                console.log(file)
-            };
-        }
+
+        var callback = function(file) {
+            fileId = file.id;
+        };
+
         request.execute(callback);
     }
 }
@@ -115,7 +127,9 @@ function printFile(fileId) {
                     //1=connection ok, 2=Request received, 3=running, 4=terminated
                     if ( myXHR.status == 200 ) {
                         console.log(myXHR.response);
-                        setLatexExpression(myXHR.response)
+                        $('#mathExpression').val("");
+                        setLatexExpression(myXHR.response);
+
                     }
                 }
             };

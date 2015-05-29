@@ -162,18 +162,13 @@ function retrieveAllFiles(authResult) {
             'callback': function (result) {
 
 
-                var tableCode = "";
                 for (var i = 0; i < result.items.length; i++) {
-                    var item = result.items[i];
-                    tableCode += "<tr><td>" + i + "</td><td>" + item.title + "</td><td>" + item.id + "</td>" +
-                    "<td class='openFile' style='cursor:pointer' data-file='" + item.id + "'>" +
-                    "<span class='glyphicon glyphicon-eye-open' aria-hidden='true'></span></td>" +
-                    "<td class='deleteFile' style='cursor:pointer' data-file='" + item.id + "'>" +
-                    "<span class='glyphicon glyphicon-remove' aria-hidden='true'></span></td></tr>";
+                    result.items[i].key = i + 1;
+                    result.items[i].id_abbr = result.items[i].id.substring(0, 10) + "...";
                 }
+                var tableCode = Mustache.render($('#template').html(), { items: result.items });
 
-                $("#filesList").css("display", "block");
-                $("#filesList > tbody").html(tableCode);
+                $("#filesListDiv").append(tableCode);
             }
         });
     } else {

@@ -91,7 +91,7 @@ describe('Math Editor', function() {
             element(by.id("dropdownTrigonometry")).click();
 
             element.all(by.css("#trigonometry button")).get(1).click();
-            browser.driver.sleep(300);
+            browser.driver.sleep(500);
             expect(mathInputArea.getAttribute('value')).toEqual("\\cos(x)");
 
             var equationNodes = element.all(by.css("#MathBuffer .mrow span"));
@@ -104,6 +104,39 @@ describe('Math Editor', function() {
             expect(equationNodes.get(2).getAttribute("class")).toEqual("mo");
             expect(equationNodes.get(3).getAttribute("class")).toEqual("mi");
             expect(equationNodes.get(4).getAttribute("class")).toEqual("mo");
+        });
+
+        it('should update selected placeholder in cos(x) formula', function() {
+            var mathInputArea = element(by.id('mathExpression'));
+            mathInputArea.clear();
+            mathInputArea.sendKeys("\\cos(!1)");
+
+            browser.driver.sleep(500);
+            element(by.css("#MathPreview span.mn")).click();
+
+            element(by.id("dropdownTrigonometry")).click();
+
+            element.all(by.css("#trigonometry button")).get(2).click().then(function() {
+                expect(mathInputArea.getAttribute('value')).toEqual("\\cos(\\tan(x))");
+
+                browser.driver.sleep(300);
+
+                var equationNodes = element.all(by.css("#MathBuffer > .MathJax_Display .mrow > span"));
+                // number of nodes
+                expect(equationNodes.count()).toEqual(9);
+
+                // class (type) of nodes
+                expect(equationNodes.get(0).getAttribute("class")).toEqual("mi");
+                expect(equationNodes.get(1).getAttribute("class")).toEqual("mo");
+                expect(equationNodes.get(2).getAttribute("class")).toEqual("mo");
+                expect(equationNodes.get(3).getAttribute("class")).toEqual("mi");
+                expect(equationNodes.get(4).getAttribute("class")).toEqual("mo");
+                expect(equationNodes.get(5).getAttribute("class")).toEqual("mo");
+                expect(equationNodes.get(6).getAttribute("class")).toEqual("mi");
+                expect(equationNodes.get(7).getAttribute("class")).toEqual("mo");
+                expect(equationNodes.get(8).getAttribute("class")).toEqual("mo");
+            });
+
         });
 
     });

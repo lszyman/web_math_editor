@@ -112,7 +112,7 @@ function onInputLatexExpr() {
 
 function evaluateLatexExpression(latexExpr) {
     var parser = math.parser();
-    var result = latexExpr
+    var result = latexExpr;
     if(latexExpr != null) {
         beforeResult = "";
         while (beforeResult != result) {

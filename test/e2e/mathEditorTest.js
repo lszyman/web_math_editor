@@ -88,6 +88,8 @@ describe('Math Editor', function() {
             var mathInputArea = element(by.id('mathExpression'));
             mathInputArea.clear();
 
+            browser.driver.sleep(500);
+
             element(by.id("dropdownTrigonometry")).click();
 
             element.all(by.css("#trigonometry button")).get(1).click();

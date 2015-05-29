@@ -20,10 +20,10 @@ function checkAuth() {
         function(){});
 }
 
-function sendFileToGoogleDrive() {
+function sendFileToGoogleDrive(fileName) {
     gapi.auth.authorize(
         {'client_id': CLIENT_ID, 'scope': SCOPES, 'immediate': true},
-        handleAuthResult);
+        handleAuthResult(fileName, fileName));
 }
 
 /**
@@ -31,11 +31,12 @@ function sendFileToGoogleDrive() {
  *
  * @param {Object} authResult Authorization result.
  */
-function handleAuthResult(authResult) {
+function handleAuthResult(authResult, fileName) {
     if (authResult && !authResult.error) {
         // Access token has been successfully retrieved, requests can be sent to the API.
         var fileContent = document.getElementById('mathExpression').value;
         var myBlob = new Blob([fileContent], {type : 'text/plain'});
+        myBlob.name = fileName;
         gapi.client.load('drive', 'v2', function() {
             insertFile(myBlob);
             alert("File successfully saved.");
@@ -63,7 +64,7 @@ function insertFile(fileData, callback) {
     reader.onload = function(e) {
         var contentType = fileData.type || 'application/octet-stream';
         var metadata = {
-            'title': fileData.name,
+            'title': fileData.name+".txt",
             'mimeType': contentType
         };
 

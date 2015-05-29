@@ -126,7 +126,7 @@
                     </li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right" id="google-drive-buttons">
-                    <button type="button" class="btn btn-default btn-lg" id="saveGoogleDriveButton" data-toggle="tooltip" data-placement="bottom" title="Save to Google Drive">
+                    <button type="button" class="btn btn-default btn-lg" data-toggle="modal" data-target="#modalSaveEquation" data-placement="bottom" title="Save to Google Drive">
                         <span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span>
                     </button>
 
@@ -189,6 +189,25 @@
             </div>
         </div>
 
+        <div class="modal fade" id="modalSaveEquation" tabindex="-1" role="dialog" aria-labelledby="modalSaveEquationLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content" style="width: 780px">
+                    <div class="modal-header">
+                        <button type="button" id="closeModalSaveEquation" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="modalSaveEquationLabel">Enter file name:</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div>
+                            <textarea class="form-control" rows="1" id="newEquationFileName"></textarea>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary" id="saveGoogleDriveButton">Save file</button>
+                    </div>
+                </div>
+            </div>
+        </div>
 
         <!--<label for="fileIdLoadFromGoogleDrive"><b>File Id: </b>-->
             <!--<input id="fileIdLoadFromGoogleDrive" type="text" name="fileIdLoadFromGoogleDrive" value="0B47CPHRFDjO-NjVyWTB3a3o3V2s" class="form-control" style="width: 300px">-->
@@ -229,7 +248,10 @@
         });
 
         $("#saveGoogleDriveButton").click(function() {
-            sendFileToGoogleDrive();
+            var newFileName = $("#newEquationFileName").val();
+            $("#newEquationFileName").val("");
+            $("#closeModalSaveEquation").click();
+            sendFileToGoogleDrive(newFileName);
         });
 
         $(document).on("click", ".deleteFile", function(event) {

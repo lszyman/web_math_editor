@@ -290,8 +290,8 @@
             var text = doc.getModel().getRoot().get("text");
 
             function onStringChanged(evt) {
-                $("#mathExpression").val("");
-                setLatexExpression(text.getText());
+                $("#mathExpression").val(text.getText());
+                onInputLatexExpr();
             }
 
             // Connect the event to the listener.

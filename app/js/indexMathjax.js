@@ -124,7 +124,7 @@ function evaluateLatexExpression(latexExpr) {
             if(beforeResult != result) {continue;}
             result = evaluateOneTypeExpr(result, /\s*\{\s*(\d+(\.\d+)?)\s*\\over\s*(\d+(\.\d+)?)\s*}\s*/, "/", /\s*\{\s*(\d+(\.\d+)?)\s*\\over\s*(\d+(\.\d+)?)\s*}\s*/, "/", parser);
             if(beforeResult != result) {continue;}
-            result = evaluateOneTypeExpr(result, /([^a-z-\+]|^)\s*(\d+(\.\d+)?)\s*\+\s*(\d+(\.\d+)?)\s*([^a-z\^\*]|$)/i, "+", /([^a-z-\+]|^)\s*(\d+(\.\d+)?)\s*-\s*(\d+(\.\d+)?)\s*([^a-z\^\*]|$)/i, "-", parser);
+            result = evaluateOneTypeExpr(result, /([^a-z-\+\^])\s*(\d+(\.\d+)?)\s*\+\s*(\d+(\.\d+)?)\s*([^a-z\^\*]|$)/i, "+", /([^a-z-\+\^])\s*(\d+(\.\d+)?)\s*-\s*(\d+(\.\d+)?)\s*([^a-z\^\*]|$)/i, "-", parser);
         }
     } else {
         return "0";

@@ -46,7 +46,7 @@ module.exports = function(config){
       'app/js/*.js': 'coverage'
     },
 
-    reporters: ['coverage'],
+    reporters: ['progress', 'coverage', 'junit'],
 
     coverageReporter: {
       type: 'html',
